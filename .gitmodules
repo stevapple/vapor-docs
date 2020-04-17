@@ -1,0 +1,3 @@
+[submodule "cn"]
+	path = cn
+	url = https://github.com/swiftclub/vapor-docs
