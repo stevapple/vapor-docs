@@ -1,0 +1,1753 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://docs.vapor.codes/4.0/routing/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+  
+    <title>Vapor:  Basics &rarr;  Routing</title>
+  
+
+    
+  
+      <link rel="stylesheet" href="../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+  <link rel="stylesheet" type="text/css" href="../styles/carbon.css">
+
+    
+  
+  <script src="../scripts/carbon.js"></script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-76177358-4","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#routing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-header-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Vapor Docs
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Routing
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    Vapor Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Install" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Install
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/macos/" title="macOS" class="md-nav__link">
+      macOS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/ubuntu/" title="Ubuntu" class="md-nav__link">
+      Ubuntu
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hello-world/" title="Hello, world" class="md-nav__link">
+      Hello, world
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder-structure/" title="Folder Structure" class="md-nav__link">
+      Folder Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spm/" title="SPM" class="md-nav__link">
+      SPM
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Basics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Basics" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Basics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Routing
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Routing" class="md-nav__link md-nav__link--active">
+      Routing
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-method" class="md-nav__link">
+    HTTP Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-path" class="md-nav__link">
+    Request Path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router-methods" class="md-nav__link">
+    Router Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#route-parameters" class="md-nav__link">
+    Route Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routes" class="md-nav__link">
+    Routes
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-component" class="md-nav__link">
+    Path Component
+  </a>
+  
+    <nav class="md-nav" aria-label="Path Component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constant" class="md-nav__link">
+    Constant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter" class="md-nav__link">
+    Parameter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anything" class="md-nav__link">
+    Anything
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catchall" class="md-nav__link">
+    Catchall
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body-streaming" class="md-nav__link">
+    Body Streaming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-routes" class="md-nav__link">
+    Viewing Routes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#route-groups" class="md-nav__link">
+    Route Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path-prefix" class="md-nav__link">
+    Path Prefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middleware" class="md-nav__link">
+    Middleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../content/" title="Content" class="md-nav__link">
+      Content
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client/" title="Client" class="md-nav__link">
+      Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../validation/" title="Validation" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../async/" title="Async" class="md-nav__link">
+      Async
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" title="Logging" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../environment/" title="Environment" class="md-nav__link">
+      Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Fluent
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Fluent" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Fluent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/models/" title="Models" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/migrations/" title="Migrations" class="md-nav__link">
+      Migrations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/relations/" title="Relations" class="md-nav__link">
+      Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/query-builder/" title="Query Builder" class="md-nav__link">
+      Query Builder
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Advanced
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Advanced" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../middleware/" title="Middleware" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server/" title="Server" class="md-nav__link">
+      Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" title="Commands" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../queues/" title="Queues" class="md-nav__link">
+      Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../websockets/" title="WebSockets" class="md-nav__link">
+      WebSockets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Security
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Security" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Security
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/" title="Crypto" class="md-nav__link">
+      Crypto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../passwords/" title="Passwords" class="md-nav__link">
+      Passwords
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Deploy
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Deploy" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Deploy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/digital-ocean/" title="DigitalOcean" class="md-nav__link">
+      DigitalOcean
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/supervisor/" title="Supervisor" class="md-nav__link">
+      Supervisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/nginx/" title="Nginx" class="md-nav__link">
+      Nginx
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Version (4.0)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Version (4.0)" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Version (4.0)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/1_5/" title="1.5" class="md-nav__link">
+      1.5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/2_0/" title="2.0" class="md-nav__link">
+      2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/3_0/" title="3.0" class="md-nav__link">
+      3.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/4_0/" title="4.0" class="md-nav__link">
+      4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrading/" title="Upgrading" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Translation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Translation" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../i18n/cn/" title="Chinese (Simplified)" class="md-nav__link">
+      Chinese (Simplified)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-method" class="md-nav__link">
+    HTTP Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-path" class="md-nav__link">
+    Request Path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router-methods" class="md-nav__link">
+    Router Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#route-parameters" class="md-nav__link">
+    Route Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routes" class="md-nav__link">
+    Routes
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-component" class="md-nav__link">
+    Path Component
+  </a>
+  
+    <nav class="md-nav" aria-label="Path Component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constant" class="md-nav__link">
+    Constant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter" class="md-nav__link">
+    Parameter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anything" class="md-nav__link">
+    Anything
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catchall" class="md-nav__link">
+    Catchall
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body-streaming" class="md-nav__link">
+    Body Streaming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-routes" class="md-nav__link">
+    Viewing Routes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#route-groups" class="md-nav__link">
+    Route Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path-prefix" class="md-nav__link">
+    Path Prefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middleware" class="md-nav__link">
+    Middleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/vapor/documentation/edit/master/4.0/docs/routing.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h1>
+<p>Routing is the process of finding the appropriate request handler for an incoming request. At the core of Vapor's routing is a high-performance, trie-node router from <a href="https://github.com/vapor/routing-kit">RoutingKit</a>.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>To understand how routing works in Vapor, you should first understand a few basics about HTTP requests. Take a look at the following example request.</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/hello/vapor</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">host</span><span class="o">:</span> <span class="l">vapor.codes</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">0</span>
+</code></pre></div>
+
+
+<p>This is a simple <code>GET</code> HTTP request to the URL <code>/hello/vapor</code>. This is the kind of HTTP request your browser would make if you pointed it to the following URL.</p>
+<div class="codehilite"><pre><span></span><code>http://vapor.codes/hello/vapor
+</code></pre></div>
+
+
+<h3 id="http-method">HTTP Method<a class="headerlink" href="#http-method" title="Permanent link">&para;</a></h3>
+<p>The first part of the request is the HTTP method. <code>GET</code> is the most common HTTP method, but there are several you will use often. These HTTP methods are often associated with <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> semantics.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>crud</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>Read</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>Replace</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>Update</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>Delete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="request-path">Request Path<a class="headerlink" href="#request-path" title="Permanent link">&para;</a></h3>
+<p>Right after the HTTP method is the request's URI. This consists of a path starting with <code>/</code> and an optional query string after <code>?</code>. The HTTP method and path are what Vapor uses to route requests.</p>
+<p>After the URI is the HTTP version followed by zero or more headers and finally a body. Since this is a <code>GET</code> request, it does not have a body. </p>
+<h3 id="router-methods">Router Methods<a class="headerlink" href="#router-methods" title="Permanent link">&para;</a></h3>
+<p>Let's take a look at how this request could be handled in Vapor. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;vapor&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span> 
+    <span class="k">return</span> <span class="s">&quot;Hello, vapor!&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>All of the common HTTP methods are available as methods on <code>Application</code>. They accept one or more string arguments that represent the request's path separated by <code>/</code>. </p>
+<p>Note that you could also write this using <code>on</code> followed by the method.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">GET</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;vapor&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></div>
+
+
+<p>With this route registered, the example HTTP request from above will result in the following HTTP response.</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">text/plain; charset=utf-8</span>
+
+Hello, vapor!
+</code></pre></div>
+
+
+<h3 id="route-parameters">Route Parameters<a class="headerlink" href="#route-parameters" title="Permanent link">&para;</a></h3>
+<p>Now that we've successfully routed a request based on the HTTP method and path, let's try making the path dynamic. Notice that the name "vapor" is hardcoded in both the path and the response. Let's make this dynamic so that you can visit <code>/hello/&lt;any name&gt;</code> and get a response.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;:name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">name</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, </span><span class="si">\(</span><span class="n">name</span><span class="si">)</span><span class="s">!&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>By using a path component prefixed with <code>:</code>, we indicate to the router that this is a dynamic component. Any string supplied here will now match this route. We can then use <code>req.parameters</code> to access the value of the string.</p>
+<p>If you run the example request again, you'll still get a response that says hello to vapor. However, you can now include any name after <code>/hello/</code> and see it included in the response. Let's try <code>/hello/swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/hello/swift</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">0</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">text/plain; charset=utf-8</span>
+
+Hello, swift!
+</code></pre></div>
+
+
+<p>Now that you understand the basics, check out each section to learn more about parameters, groups, and more.</p>
+<h2 id="routes">Routes<a class="headerlink" href="#routes" title="Permanent link">&para;</a></h2>
+<p>A route specifies a request handler for a given HTTP method and URI path. It can also store additional metadata.</p>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
+<p>Routes can be registered directly to your <code>Application</code> using various HTTP method helpers. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /foo/bar/baz</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;baz&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Route handlers support returning anything that is <code>ResponseEncodable</code>. This includes <code>Content</code> and any <code>EventLoopFuture</code>'s where the future value is <code>ResponseEncodable</code>.</p>
+<p>You can specify the return type of a route using <code>-&gt; T</code> before <code>in</code>. This can be useful in situations where the compiler cannot determine the return type.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="s">&quot;bar&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>These are the supported route helper methods:</p>
+<ul>
+<li><code>get</code></li>
+<li><code>post</code></li>
+<li><code>patch</code></li>
+<li><code>put</code></li>
+<li><code>delete</code></li>
+</ul>
+<p>In addition to the HTTP method helpers, there is an <code>on</code> function that accepts HTTP method as an input parameter. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to OPTIONS /foo/bar/baz</span>
+<span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">OPTIONS</span><span class="p">,</span> <span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;baz&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="path-component">Path Component<a class="headerlink" href="#path-component" title="Permanent link">&para;</a></h3>
+<p>Each route registration method accepts a variadic list of <code>PathComponent</code>. This type is expressible by string literal and has four cases:</p>
+<ul>
+<li>Constant (<code>foo</code>)</li>
+<li>Parameter (<code>:foo</code>)</li>
+<li>Anything (<code>*</code>)</li>
+<li>Catchall (<code>**</code>)</li>
+</ul>
+<h4 id="constant">Constant<a class="headerlink" href="#constant" title="Permanent link">&para;</a></h4>
+<p>This is a static route component. Only requests with an exactly matching string at this position will be permitted. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /foo/bar/baz</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="s">&quot;baz&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h4 id="parameter">Parameter<a class="headerlink" href="#parameter" title="Permanent link">&para;</a></h4>
+<p>This is a dynamic route component. Any string at this position will be allowed. A parameter path component is specified with a <code>:</code> prefix. The string following the <code>:</code> will be used as the parameter's name. You can use the name to later fetch the parameters value from the request.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /foo/bar/baz</span>
+<span class="c1">// responds to GET /foo/qux/baz</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;:bar&quot;</span><span class="p">,</span> <span class="s">&quot;baz&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h4 id="anything">Anything<a class="headerlink" href="#anything" title="Permanent link">&para;</a></h4>
+<p>This is very similar to parameter except the value is discarded. This path component is specified as just <code>*</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /foo/bar/baz</span>
+<span class="c1">// responds to GET /foo/qux/baz</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="s">&quot;baz&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h4 id="catchall">Catchall<a class="headerlink" href="#catchall" title="Permanent link">&para;</a></h4>
+<p>This is a dynamic route component that matches one or more components. It is specified using <code>**</code>. Any string at this position or later positions will be allowed in the request. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /foo/bar</span>
+<span class="c1">// responds to GET /foo/bar/baz</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;**&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span> 
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<p>When using a parameter path component (prefixed with <code>:</code>), the value of the URI at that position will be stored in <code>req.parameters</code>. You can use the name of the path component to access the value. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /hello/foo</span>
+<span class="c1">// responds to GET /hello/bar</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;:name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">name</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, </span><span class="si">\(</span><span class="n">name</span><span class="si">)</span><span class="s">!&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We can be sure that <code>req.parameters.get</code> will never return <code>nil</code> here since our route path includes <code>:name</code>. However, if you are accessing route parameters in middleware or in code triggered by multiple routes, you will want to handle the possibility of <code>nil</code>.</p>
+</div>
+<p>If you use <code>**</code> to specify a Catchall, you can retrieve the matched path like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /hello/foo/bar/baz</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;:name&quot;</span><span class="p">,</span> <span class="s">&quot;**&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">name</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="o">!</span>
+    <span class="kd">let</span> <span class="nv">attached</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, </span><span class="si">\(</span><span class="n">name</span><span class="si">)</span><span class="s"> with </span><span class="si">\(</span><span class="n">attached</span><span class="si">)</span><span class="s">!&quot;</span> <span class="c1">// Hello, foo with bar/baz!</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p><code>req.parameters</code> also supports casting the parameter to <code>LosslessStringConvertible</code> types automatically. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// responds to GET /hello/42</span>
+<span class="c1">// responds to GET /hello/1337</span>
+<span class="c1">// ...</span>
+<span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;number&quot;</span><span class="p">,</span> <span class="s">&quot;:x&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="k">in</span> 
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">int</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">Int</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">Abort</span><span class="p">(.</span><span class="n">badRequest</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="s">&quot;</span><span class="si">\(</span><span class="n">int</span><span class="si">)</span><span class="s"> is a great number&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="body-streaming">Body Streaming<a class="headerlink" href="#body-streaming" title="Permanent link">&para;</a></h3>
+<p>When registering a route using the <code>on</code> method, you can specify how the request body should be handled. By default, the request body is collected into memory before calling your handler. This is useful since it allows for request content decoding to be synchronous. However, for large requests like file uploads this can potentially strain your system memory. </p>
+<p>To change how the request body is handled, use the <code>body</code> parameter when registering a route. There are two methods:</p>
+<ul>
+<li><code>collect</code>: Collects the request body into memory</li>
+<li><code>stream</code>: Streams the request body</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">on</span><span class="p">(.</span><span class="n">POST</span><span class="p">,</span> <span class="s">&quot;file-upload&quot;</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="p">.</span><span class="n">stream</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>When the request body is streamed, <code>req.body.data</code> will be <code>nil</code>. You must use <code>req.body.drain</code> to handle each chunk as it is sent to your route. </p>
+<h3 id="viewing-routes">Viewing Routes<a class="headerlink" href="#viewing-routes" title="Permanent link">&para;</a></h3>
+<p>You can access your application's routes by making the <code>Routes</code> service or using <code>app.routes</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="bp">print</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">routes</span><span class="p">.</span><span class="n">all</span><span class="p">)</span> <span class="c1">// [Route]</span>
+</code></pre></div>
+
+
+<p>Vapor also ships with a <code>routes</code> command that prints all available routes in an ASCII formatted table. </p>
+<div class="codehilite"><pre><span></span><code>$ swift run Run routes
++--------+----------------+
+<span class="p">|</span> GET    <span class="p">|</span> /              <span class="p">|</span>
++--------+----------------+
+<span class="p">|</span> GET    <span class="p">|</span> /hello/        <span class="p">|</span>
++--------+----------------+
+<span class="p">|</span> GET    <span class="p">|</span> /todos         <span class="p">|</span>
++--------+----------------+
+<span class="p">|</span> POST   <span class="p">|</span> /todos         <span class="p">|</span>
++--------+----------------+
+<span class="p">|</span> DELETE <span class="p">|</span> /todos/:todoID <span class="p">|</span>
++--------+----------------+
+</code></pre></div>
+
+
+<h3 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h3>
+<p>All route registration methods return the created <code>Route</code>. This allows you to metadata to the route's <code>userInfo</code> dictionary. There are some default methods available, like adding a description.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;:name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}.</span><span class="n">description</span><span class="p">(</span><span class="s">&quot;says hello&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="route-groups">Route Groups<a class="headerlink" href="#route-groups" title="Permanent link">&para;</a></h2>
+<p>Route grouping allows you to create a set of routes with a path prefix or specific middleware. Grouping supports a builder and closure based syntax.</p>
+<p>All grouping methods return a <code>RouteBuilder</code> meaning you can infinitely mix, match, and nest your groups with other route building methods.</p>
+<h3 id="path-prefix">Path Prefix<a class="headerlink" href="#path-prefix" title="Permanent link">&para;</a></h3>
+<p>Path prefixing route groups allow you to prepend one or more path components to a group of routes. </p>
+<div class="codehilite"><pre><span></span><code><span class="kd">let</span> <span class="nv">users</span> <span class="p">=</span> <span class="n">app</span><span class="p">.</span><span class="n">grouped</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="c1">// GET /users</span>
+<span class="n">users</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">// POST /users</span>
+<span class="n">users</span><span class="p">.</span><span class="n">post</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">// GET /users/:id</span>
+<span class="n">users</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;:id&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">id</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="o">!</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Any path component you can pass into methods like <code>get</code> or <code>post</code> can be passed into <code>grouped</code>. There is an alternative, closure-based syntax as well.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">users</span> <span class="k">in</span>
+    <span class="c1">// GET /users</span>
+    <span class="n">users</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+    <span class="c1">// POST /users</span>
+    <span class="n">users</span><span class="p">.</span><span class="n">post</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+    <span class="c1">// GET /users/:id</span>
+    <span class="n">users</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;:id&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="kd">let</span> <span class="nv">id</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="o">!</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Nesting path prefixing route groups allows you to concisely define CRUD APIs.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">users</span> <span class="k">in</span>
+    <span class="c1">// GET /users</span>
+    <span class="n">users</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="c1">// POST /users</span>
+    <span class="n">users</span><span class="p">.</span><span class="n">post</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+    <span class="n">users</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="s">&quot;:id&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">user</span> <span class="k">in</span>
+        <span class="c1">// GET /users/:id</span>
+        <span class="n">user</span><span class="p">.</span><span class="kr">get</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+        <span class="c1">// PATCH /users/:id</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">patch</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+        <span class="c1">// PUT /users/:id</span>
+        <span class="n">user</span><span class="p">.</span><span class="n">put</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="middleware">Middleware<a class="headerlink" href="#middleware" title="Permanent link">&para;</a></h3>
+<p>In addition to prefixing path components, you can also add middleware to route groups. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;fast-thing&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="n">app</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="n">RateLimitMiddleware</span><span class="p">(</span><span class="n">requestsPerMinute</span><span class="p">:</span> <span class="mi">5</span><span class="p">))</span> <span class="p">{</span> <span class="n">rateLimited</span> <span class="k">in</span>
+    <span class="n">rateLimited</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;slow-thing&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>This is especially useful for protecting subsets of your routes with different authentication middleware. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;login&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="kd">let</span> <span class="nv">auth</span> <span class="p">=</span> <span class="n">app</span><span class="p">.</span><span class="n">grouped</span><span class="p">(</span><span class="n">AuthMiddleware</span><span class="p">())</span>
+<span class="n">auth</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;dashboard&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="n">auth</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;logout&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../spm/" title="SPM" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                SPM
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../content/" title="Content" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Content
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

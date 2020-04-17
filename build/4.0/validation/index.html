@@ -1,0 +1,1466 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://docs.vapor.codes/4.0/validation/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+  
+    <title>Vapor:  Basics &rarr;  Validation</title>
+  
+
+    
+  
+      <link rel="stylesheet" href="../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+  <link rel="stylesheet" type="text/css" href="../styles/carbon.css">
+
+    
+  
+  <script src="../scripts/carbon.js"></script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-76177358-4","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#validation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-header-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Vapor Docs
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Validation
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    Vapor Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Install" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Install
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/macos/" title="macOS" class="md-nav__link">
+      macOS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/ubuntu/" title="Ubuntu" class="md-nav__link">
+      Ubuntu
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hello-world/" title="Hello, world" class="md-nav__link">
+      Hello, world
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder-structure/" title="Folder Structure" class="md-nav__link">
+      Folder Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spm/" title="SPM" class="md-nav__link">
+      SPM
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Basics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Basics" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Basics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../routing/" title="Routing" class="md-nav__link">
+      Routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../content/" title="Content" class="md-nav__link">
+      Content
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client/" title="Client" class="md-nav__link">
+      Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Validation
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Validation" class="md-nav__link md-nav__link--active">
+      Validation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#human-readable-errors" class="md-nav__link">
+    Human-Readable Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specific-validation" class="md-nav__link">
+    Specific Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validatable" class="md-nav__link">
+    Validatable
+  </a>
+  
+    <nav class="md-nav" aria-label="Validatable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-validations" class="md-nav__link">
+    Adding Validations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-request" class="md-nav__link">
+    Validating Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integer-validation" class="md-nav__link">
+    Integer Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-validation" class="md-nav__link">
+    String Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-validation" class="md-nav__link">
+    Enum Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validators" class="md-nav__link">
+    Validators
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../async/" title="Async" class="md-nav__link">
+      Async
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" title="Logging" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../environment/" title="Environment" class="md-nav__link">
+      Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Fluent
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Fluent" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Fluent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/models/" title="Models" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/migrations/" title="Migrations" class="md-nav__link">
+      Migrations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/relations/" title="Relations" class="md-nav__link">
+      Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/query-builder/" title="Query Builder" class="md-nav__link">
+      Query Builder
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Advanced
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Advanced" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../middleware/" title="Middleware" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server/" title="Server" class="md-nav__link">
+      Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" title="Commands" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../queues/" title="Queues" class="md-nav__link">
+      Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../websockets/" title="WebSockets" class="md-nav__link">
+      WebSockets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Security
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Security" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Security
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/" title="Crypto" class="md-nav__link">
+      Crypto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../passwords/" title="Passwords" class="md-nav__link">
+      Passwords
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Deploy
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Deploy" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Deploy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/digital-ocean/" title="DigitalOcean" class="md-nav__link">
+      DigitalOcean
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/supervisor/" title="Supervisor" class="md-nav__link">
+      Supervisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/nginx/" title="Nginx" class="md-nav__link">
+      Nginx
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Version (4.0)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Version (4.0)" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Version (4.0)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/1_5/" title="1.5" class="md-nav__link">
+      1.5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/2_0/" title="2.0" class="md-nav__link">
+      2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/3_0/" title="3.0" class="md-nav__link">
+      3.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/4_0/" title="4.0" class="md-nav__link">
+      4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrading/" title="Upgrading" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Translation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Translation" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../i18n/cn/" title="Chinese (Simplified)" class="md-nav__link">
+      Chinese (Simplified)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#human-readable-errors" class="md-nav__link">
+    Human-Readable Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specific-validation" class="md-nav__link">
+    Specific Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validatable" class="md-nav__link">
+    Validatable
+  </a>
+  
+    <nav class="md-nav" aria-label="Validatable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-validations" class="md-nav__link">
+    Adding Validations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-request" class="md-nav__link">
+    Validating Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integer-validation" class="md-nav__link">
+    Integer Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-validation" class="md-nav__link">
+    String Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-validation" class="md-nav__link">
+    Enum Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validators" class="md-nav__link">
+    Validators
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/vapor/documentation/edit/master/4.0/docs/validation.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h1>
+<p>Vapor's Validation API helps you validate incoming request before using the <a href="../content/">Content</a> API to decode data. </p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Vapor's deep integration of Swift's type-safe <code>Codable</code> protocol means you don't need to worry about data validation as much compared to dynamically typed languages. However, there are still a few reasons why you might want to opt-in to explicit validation using the Validation API.</p>
+<h3 id="human-readable-errors">Human-Readable Errors<a class="headerlink" href="#human-readable-errors" title="Permanent link">&para;</a></h3>
+<p>Decoding structs using the <a href="../content/">Content</a> API will yield errors if any of the data is not valid. However, these error messages can sometimes lack human-readability. For example, take the following string-backed enum:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">enum</span> <span class="nc">Color</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">Codable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">red</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">green</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>If a user tries to pass the string <code>"purple"</code> to a property of type <code>Color</code>, they will get an error similar to the following:</p>
+<div class="codehilite"><pre><span></span><code>Cannot initialize Color from invalid String value purple for key favoriteColor
+</code></pre></div>
+
+
+<p>While this error is technically correct and successfully protected the endpoint from an invalid value, it could do better informing the user about the mistake and which options are available. By using the Validation API, you can generate errors like the following:</p>
+<div class="codehilite"><pre><span></span><code>favoriteColor is not red, blue, or green
+</code></pre></div>
+
+
+<p>Furthermore, <code>Codable</code> will stop attempting to decode a type as soon as the first error is hit. This means that even if there are many invalid properties in the request, the user will only see the first error. The Validation API will report all validation failures in a single request.</p>
+<h3 id="specific-validation">Specific Validation<a class="headerlink" href="#specific-validation" title="Permanent link">&para;</a></h3>
+<p><code>Codable</code> handles type validation well, but sometimes you want more than that. For example, validating the contents of a string or validating the size of an integer. The Validation API has validators for helping to validate data like emails, character sets, integer ranges, and more.</p>
+<h2 id="validatable">Validatable<a class="headerlink" href="#validatable" title="Permanent link">&para;</a></h2>
+<p>To validate a request, you will need to generate a <code>Validations</code> collection. This is most commonly done by conforming an existing type to <code>Validatable</code>. </p>
+<p>Let's take a look at how you could add validation to this simple <code>POST /users</code> endpoint. This guide assumes you are already familiar with the <a href="../content/">Content</a> API.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">enum</span> <span class="nc">Color</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">Codable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">red</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">green</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="nc">CreateUser</span><span class="p">:</span> <span class="n">Content</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+    <span class="kd">var</span> <span class="nv">username</span><span class="p">:</span> <span class="nb">String</span>
+    <span class="kd">var</span> <span class="nv">age</span><span class="p">:</span> <span class="nb">Int</span>
+    <span class="kd">var</span> <span class="nv">email</span><span class="p">:</span> <span class="nb">String</span>
+    <span class="kd">var</span> <span class="nv">favoriteColor</span><span class="p">:</span> <span class="n">Color</span><span class="p">?</span>
+<span class="p">}</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="n">CreateUser</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">user</span> <span class="p">=</span> <span class="k">try</span> <span class="n">req</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CreateUser</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+    <span class="c1">// Do something with user.</span>
+    <span class="k">return</span> <span class="n">user</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="adding-validations">Adding Validations<a class="headerlink" href="#adding-validations" title="Permanent link">&para;</a></h3>
+<p>The first step is to conform the type you are decoding, in this case <code>CreateUser</code>, to <code>Validatable</code>. This can be done in an extension.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">extension</span> <span class="nc">CreateUser</span><span class="p">:</span> <span class="n">Validatable</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">validations</span><span class="p">(</span><span class="kc">_</span> <span class="n">validations</span><span class="p">:</span> <span class="kr">inout</span> <span class="n">Validations</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Validations go here.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>The static method <code>validations(_:)</code> will be called when <code>CreateUser</code> is validated. Any validations you want to perform should be added to the supplied <code>Validations</code> collection. Let's take a look at adding a simple validation to require that the user's email is valid.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;email&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="k">is</span><span class="p">:</span> <span class="p">.</span><span class="n">email</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>The first parameter is the value's expected key, in this case <code>"email"</code>. This should match the property name on the type being validated. The second parameter, <code>as</code>, is the expected type, in this case <code>String</code>. The type usually matches the property's type, but not always. Finally, one or more validators can be added after the third parameter, <code>is</code>. In this case, we are adding a single validator that checks if the value is an email address.</p>
+<h3 id="validating-request">Validating Request<a class="headerlink" href="#validating-request" title="Permanent link">&para;</a></h3>
+<p>Once you've conformed your type to <code>Validatable</code>, the static <code>validate(_:)</code> function can be used to validate requests. Add the following line before <code>req.content.decode(CreateUser.self)</code> in the route handler.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span> <span class="n">CreateUser</span><span class="p">.</span><span class="n">validate</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Now, try sending the following request containing an invalid email:</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/users</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">67</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;favoriteColor&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Foo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>You should see the following error returned:</p>
+<div class="codehilite"><pre><span></span><code>email is not a valid email address
+</code></pre></div>
+
+
+<h3 id="integer-validation">Integer Validation<a class="headerlink" href="#integer-validation" title="Permanent link">&para;</a></h3>
+<p>Great, now let's try adding a validation for <code>age</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">Int</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="k">is</span><span class="p">:</span> <span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mf">13.</span><span class="p">..))</span>
+</code></pre></div>
+
+
+<p>The age validation requires that the age is greater than or equal to <code>13</code>. If you try the same request from above, you should see a new error now:</p>
+<div class="codehilite"><pre><span></span><code>age is less than minimum of 13, email is not a valid email address
+</code></pre></div>
+
+
+<h3 id="string-validation">String Validation<a class="headerlink" href="#string-validation" title="Permanent link">&para;</a></h3>
+<p>Next, let's add validations for <code>name</code> and <code>username</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="k">is</span><span class="p">:</span> <span class="o">!</span><span class="p">.</span><span class="n">empty</span><span class="p">)</span>
+<span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="k">is</span><span class="p">:</span> <span class="p">.</span><span class="bp">count</span><span class="p">(</span><span class="mf">3.</span><span class="p">..)</span> <span class="o">&amp;&amp;</span> <span class="p">.</span><span class="n">alphanumeric</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>The name validation uses the <code>!</code> operator to invert the <code>.empty</code> validation. This will require that the string is not empty.</p>
+<p>The username validation combines two validators using <code>&amp;&amp;</code>. This will require that the string is at least 3 characters long <em>and</em> contains only alphanumeric characters.</p>
+<h3 id="enum-validation">Enum Validation<a class="headerlink" href="#enum-validation" title="Permanent link">&para;</a></h3>
+<p>Finally, let's take a look at a slightly more advanced validation to check that the supplied <code>favoriteColor</code> is valid.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s">&quot;favoriteColor&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span>
+    <span class="k">is</span><span class="p">:</span> <span class="p">.</span><span class="k">in</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;green&quot;</span><span class="p">),</span>
+    <span class="kr">required</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<p>Since it's not possible to decode a <code>Color</code> from an invalid value, this validation uses <code>String</code> as the base type. It uses the <code>.in</code> validator to verify that the value is a valid option: red, blue, or green. Since this value is optional, <code>required</code> is set to false to signal that validation should not fail if this key is missing from the request data.</p>
+<p>Note that while the favorite color validation will pass if the key is missing, it will not pass if <code>null</code> is supplied. If you want to support <code>null</code>, change the validation type to <code>String?</code> and use the <code>.nil ||</code> (read as: "is nil or ...") convenience.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">validations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="s">&quot;favoriteColor&quot;</span><span class="p">,</span> <span class="k">as</span><span class="p">:</span> <span class="nb">String</span><span class="p">?.</span><span class="kc">self</span><span class="p">,</span>
+    <span class="k">is</span><span class="p">:</span> <span class="p">.</span><span class="kc">nil</span> <span class="o">||</span> <span class="p">.</span><span class="k">in</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;green&quot;</span><span class="p">),</span>
+    <span class="kr">required</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="validators">Validators<a class="headerlink" href="#validators" title="Permanent link">&para;</a></h2>
+<p>Below is a list of the currently supported validators and a brief explanation of what they do.</p>
+<table>
+<thead>
+<tr>
+<th>Validation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.ascii</code></td>
+<td>Contains only ASCII characters.</td>
+</tr>
+<tr>
+<td><code>.alphanumeric</code></td>
+<td>Contains only alphanumeric characters.</td>
+</tr>
+<tr>
+<td><code>.characterSet(_:)</code></td>
+<td>Contains only characters from supplied <code>CharacterSet</code>.</td>
+</tr>
+<tr>
+<td><code>.count(_:)</code></td>
+<td>Collection's count is within supplied bounds.</td>
+</tr>
+<tr>
+<td><code>.email</code></td>
+<td>Contains a valid email.</td>
+</tr>
+<tr>
+<td><code>.empty</code></td>
+<td>Collection is empty.</td>
+</tr>
+<tr>
+<td><code>.in(_:)</code></td>
+<td>Value is in supplied <code>Collection</code>.</td>
+</tr>
+<tr>
+<td><code>.nil</code></td>
+<td>Value is <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>.range(_:)</code></td>
+<td>Value is within supplied <code>Range</code>.</td>
+</tr>
+<tr>
+<td><code>.url</code></td>
+<td>Contains a valid URL.</td>
+</tr>
+</tbody>
+</table>
+<p>Validators can also be combined to build complex validations using operators. </p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Position</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!</code></td>
+<td>prefix</td>
+<td>Inverts a validator, requiring the opposite.</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>infix</td>
+<td>Combines two validators, requires both.</td>
+</tr>
+<tr>
+<td><code>||</code></td>
+<td>infix</td>
+<td>Combines two validators, requires one.</td>
+</tr>
+</tbody>
+</table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../client/" title="Client" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Client
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../async/" title="Async" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Async
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

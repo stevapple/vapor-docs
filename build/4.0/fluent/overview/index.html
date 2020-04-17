@@ -1,0 +1,2182 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://docs.vapor.codes/4.0/fluent/overview/">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+  
+    <title>Vapor:  Fluent &rarr;  Overview</title>
+  
+
+    
+  
+      <link rel="stylesheet" href="../../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+  <link rel="stylesheet" type="text/css" href="../../styles/carbon.css">
+
+    
+  
+  <script src="../../scripts/carbon.js"></script>
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-76177358-4","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fluent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-header-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Vapor Docs
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.vapor.codes/4.0/" title="Vapor Docs" class="md-nav__button md-logo" aria-label="Vapor Docs">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Vapor Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="http://github.com/vapor/vapor/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Install" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Install
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/macos/" title="macOS" class="md-nav__link">
+      macOS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/ubuntu/" title="Ubuntu" class="md-nav__link">
+      Ubuntu
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hello-world/" title="Hello, world" class="md-nav__link">
+      Hello, world
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../folder-structure/" title="Folder Structure" class="md-nav__link">
+      Folder Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../spm/" title="SPM" class="md-nav__link">
+      SPM
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Basics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Basics" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Basics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../routing/" title="Routing" class="md-nav__link">
+      Routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../content/" title="Content" class="md-nav__link">
+      Content
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../client/" title="Client" class="md-nav__link">
+      Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../validation/" title="Validation" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../async/" title="Async" class="md-nav__link">
+      Async
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../logging/" title="Logging" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/" title="Environment" class="md-nav__link">
+      Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Fluent
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Fluent" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Fluent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Overview
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
+      Overview
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-project" class="md-nav__link">
+    Existing Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    Drivers
+  </a>
+  
+    <nav class="md-nav" aria-label="Drivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    SQLite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    MySQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+    <nav class="md-nav" aria-label="Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identifier" class="md-nav__link">
+    Identifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    Fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrations" class="md-nav__link">
+    Migrations
+  </a>
+  
+    <nav class="md-nav" aria-label="Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate" class="md-nav__link">
+    Migrate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying" class="md-nav__link">
+    Querying
+  </a>
+  
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    All
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    Create
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent" class="md-nav__link">
+    Parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#children" class="md-nav__link">
+    Children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eager-load" class="md-nav__link">
+    Eager Load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    Siblings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timestamps" class="md-nav__link">
+    Timestamps
+  </a>
+  
+    <nav class="md-nav" aria-label="Timestamps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#soft-delete" class="md-nav__link">
+    Soft Delete
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../models/" title="Models" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../migrations/" title="Migrations" class="md-nav__link">
+      Migrations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../relations/" title="Relations" class="md-nav__link">
+      Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../query-builder/" title="Query Builder" class="md-nav__link">
+      Query Builder
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Advanced
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Advanced" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Advanced
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../middleware/" title="Middleware" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../server/" title="Server" class="md-nav__link">
+      Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/" title="Commands" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../queues/" title="Queues" class="md-nav__link">
+      Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../websockets/" title="WebSockets" class="md-nav__link">
+      WebSockets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Security
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Security" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Security
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../crypto/" title="Crypto" class="md-nav__link">
+      Crypto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../passwords/" title="Passwords" class="md-nav__link">
+      Passwords
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Deploy
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Deploy" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Deploy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/digital-ocean/" title="DigitalOcean" class="md-nav__link">
+      DigitalOcean
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/supervisor/" title="Supervisor" class="md-nav__link">
+      Supervisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deploy/nginx/" title="Nginx" class="md-nav__link">
+      Nginx
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Version (4.0)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Version (4.0)" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Version (4.0)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../version/1_5/" title="1.5" class="md-nav__link">
+      1.5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../version/2_0/" title="2.0" class="md-nav__link">
+      2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../version/3_0/" title="3.0" class="md-nav__link">
+      3.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../version/4_0/" title="4.0" class="md-nav__link">
+      4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/" title="Upgrading" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Translation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Translation" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../i18n/cn/" title="Chinese (Simplified)" class="md-nav__link">
+      Chinese (Simplified)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-project" class="md-nav__link">
+    Existing Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    Drivers
+  </a>
+  
+    <nav class="md-nav" aria-label="Drivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    SQLite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    MySQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+    <nav class="md-nav" aria-label="Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identifier" class="md-nav__link">
+    Identifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    Fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrations" class="md-nav__link">
+    Migrations
+  </a>
+  
+    <nav class="md-nav" aria-label="Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate" class="md-nav__link">
+    Migrate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying" class="md-nav__link">
+    Querying
+  </a>
+  
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    All
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    Create
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent" class="md-nav__link">
+    Parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#children" class="md-nav__link">
+    Children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eager-load" class="md-nav__link">
+    Eager Load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#siblings" class="md-nav__link">
+    Siblings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timestamps" class="md-nav__link">
+    Timestamps
+  </a>
+  
+    <nav class="md-nav" aria-label="Timestamps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#soft-delete" class="md-nav__link">
+    Soft Delete
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/vapor/documentation/edit/master/4.0/docs/fluent/overview.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="fluent">Fluent<a class="headerlink" href="#fluent" title="Permanent link">&para;</a></h1>
+<p>Fluent is an <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> framework for Swift. It takes advantage of Swift's strong type system to provide an easy-to-use interface for your database. Using Fluent centers around the creation of model types which represent data structures in your database. These models are then used to perform create, read, update, and delete operations instead of writing raw queries.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>When creating a project using <code>vapor new</code>, answer "yes" to including Fluent and choose which database driver you want to use. This will automatically add the dependencies to your new project as well as example configuration code.</p>
+<h3 id="existing-project">Existing Project<a class="headerlink" href="#existing-project" title="Permanent link">&para;</a></h3>
+<p>If you have an existing project that you want to add Fluent to, you will need to add two dependencies to your <a href="../../spm/">package</a>:</p>
+<ul>
+<li><a href="https://github.com/vapor/fluent">vapor/fluent</a>@4.0.0</li>
+<li>One (or more) Fluent driver(s) of your choice</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">),</span>
+<span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-&lt;db&gt;-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">version</span><span class="p">&gt;),</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">target</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent&quot;</span><span class="p">),</span> 
+    <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Fluent&lt;db&gt;Driver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-&lt;db&gt;-driver&quot;</span><span class="p">),</span> 
+    <span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;Vapor&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span>
+<span class="p">]),</span>
+</code></pre></div>
+
+
+<p>Once the packages are added as dependencies, you can configure your databases using <code>app.databases</code> in <code>configure.swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">import</span> <span class="nc">Fluent</span>
+<span class="kd">import</span> <span class="nc">Fluent</span><span class="p">&lt;</span><span class="nc">db</span><span class="p">&gt;</span><span class="nc">Driver</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(&lt;</span><span class="n">db</span> <span class="n">config</span><span class="p">&gt;,</span> <span class="k">as</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">identifier</span><span class="p">&gt;)</span>
+</code></pre></div>
+
+
+<p>Each of the Fluent drivers below has more specific instructions for configuration.</p>
+<h3 id="drivers">Drivers<a class="headerlink" href="#drivers" title="Permanent link">&para;</a></h3>
+<p>Fluent currently has three officially supported drivers. You can search GitHub for the tag <a href="https://github.com/topics/fluent-database"><code>fluent-driver</code></a> for a full list of official and third-party Fluent database drivers.</p>
+<h4 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h4>
+<p>PostgreSQL is an open source, standards compliant SQL database. It is easily configurable on most cloud hosting providers. This is Fluent's <strong>recommended</strong> database driver.</p>
+<p>To use PostgreSQL, add the following dependencies to your package.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-postgres-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;2.0.0-beta&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentPostgresDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-postgres-driver&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Once the dependencies are added, configure the database's credentials with Fluent using <code>app.databases.use</code> in <code>configure.swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">import</span> <span class="nc">Fluent</span>
+<span class="kd">import</span> <span class="nc">FluentPostgresDriver</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">postgres</span><span class="p">(</span><span class="n">hostname</span><span class="p">:</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">psql</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>You can also parse the credentials from a database connection string.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">postgres</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;&lt;connection string&gt;&quot;</span><span class="p">),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">psql</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h4 id="sqlite">SQLite<a class="headerlink" href="#sqlite" title="Permanent link">&para;</a></h4>
+<p>SQLite is an open source, embedded SQL database. Its simplistic nature makes it a great candiate for prototyping and testing.</p>
+<p>To use SQLite, add the following dependencies to your package.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-sqlite-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentSQLiteDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-sqlite-driver&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Once the dependencies are added, configure the database with Fluent using <code>app.databases.use</code> in <code>configure.swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">import</span> <span class="nc">Fluent</span>
+<span class="kd">import</span> <span class="nc">FluentSQLiteDriver</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">sqlite</span><span class="p">(.</span><span class="n">file</span><span class="p">(</span><span class="s">&quot;db.sqlite&quot;</span><span class="p">)),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>You can also configure SQLite to store the database ephemerally in memory.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">sqlite</span><span class="p">(.</span><span class="n">memory</span><span class="p">),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">sqlite</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>If you use an in-memory database, make sure to set Fluent to migrate automatically using <code>--auto-migrate</code> or run <code>app.autoMigrate()</code> after adding migrations.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTodo</span><span class="p">())</span>
+<span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">autoMigrate</span><span class="p">().</span><span class="n">wait</span><span class="p">()</span>
+</code></pre></div>
+
+
+<h4 id="mysql">MySQL<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h4>
+<p>MySQL is a popular open source SQL database. It is available on many cloud hosting providers. This driver also supports MariaDB.</p>
+<p>To use MySQL, add the following dependencies to your package.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">package</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;https://github.com/vapor/fluent-mysql-driver.git&quot;</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="s">&quot;4.0.0-beta&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;FluentMySQLDriver&quot;</span><span class="p">,</span> <span class="n">package</span><span class="p">:</span> <span class="s">&quot;fluent-mysql-driver&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Once the dependencies are added, configure the database's credentials with Fluent using <code>app.databases.use</code> in <code>configure.swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">import</span> <span class="nc">Fluent</span>
+<span class="kd">import</span> <span class="nc">FluentMySQLDriver</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">mysql</span><span class="p">(</span><span class="n">hostname</span><span class="p">:</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="s">&quot;vapor&quot;</span><span class="p">),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">mysql</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>You can also parse the credentials from a database connection string.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span> <span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">use</span><span class="p">(.</span><span class="n">mysql</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s">&quot;&lt;connection string&gt;&quot;</span><span class="p">),</span> <span class="k">as</span><span class="p">:</span> <span class="p">.</span><span class="n">mysql</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
+<p>Models represent fixed data structures in your database, like tables or collections. Models have one or more fields that store codable values. All models also have a unique identifier. Property wrappers are used to denote identifiers and fields as well as more complex mappings mentioned later. Take a look at the following model which represents a galaxy.</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">final</span> <span class="kd">class</span> <span class="nc">Galaxy</span><span class="p">:</span> <span class="n">Model</span> <span class="p">{</span>
+    <span class="c1">// Name of the table or collection.</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">schema</span> <span class="p">=</span> <span class="s">&quot;galaxies&quot;</span>
+
+    <span class="c1">// Unique identifier for this Galaxy.</span>
+    <span class="p">@</span><span class="n">ID</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="p">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span>
+
+    <span class="c1">// The Galaxy&#39;s name.</span>
+    <span class="p">@</span><span class="n">Field</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+
+    <span class="c1">// Creates a new, empty Galaxy.</span>
+    <span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="c1">// Creates a new Galaxy with all properties set.</span>
+    <span class="kd">init</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>To create a new model, create a new class conforming to <code>Model</code>. </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It's recommended to mark model classes <code>final</code> to improve performance and simplify conformance requirements.</p>
+</div>
+<p>The <code>Model</code> protocol's first requirement is the static string <code>schema</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">static</span> <span class="kd">let</span> <span class="nv">schema</span> <span class="p">=</span> <span class="s">&quot;galaxies&quot;</span>
+</code></pre></div>
+
+
+<p>This property tells Fluent which table or collection the model corresponds to. This can be a table that already exists in the database or one that you will create with a <a href="#migration">migration</a>. The schema is usually <code>snake_case</code> and plural.</p>
+<h3 id="identifier">Identifier<a class="headerlink" href="#identifier" title="Permanent link">&para;</a></h3>
+<p>The next requirement is an identifier field named <code>id</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">ID</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span>
+</code></pre></div>
+
+
+<p>This field must use the <code>@ID</code> property wrapper. Fluent recommends using <code>UUID</code> and the special <code>.id</code> field key since this is compatible with all of Fluent's drivers. </p>
+<p>If you want to use a custom ID key or type, use the <code>@ID(custom:)</code> overload. </p>
+<h3 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h3>
+<p>After the identifier is added, you can add however many fields you'd like to store additional information. In this example, the only additional field is the galaxy's name.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Field</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+</code></pre></div>
+
+
+<p>For simple fields, the <code>@Field</code> property wrapper is used. Like <code>@ID</code>, the <code>key</code> parameter specifies the field's name in the database. This is especially useful for cases where database field naming convention may be different than in Swift, e.g., using <code>snake_case</code> instead of <code>camelCase</code>.</p>
+<p>Next, all models require an empty init. This allows Fluent to create new instances of the model.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div>
+
+
+<p>Finally, you can add a convenience init for your model that sets all of its properties.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">init</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Using convenience inits is especially helpful if you add new properties to your model as you can get compile-time errors if the init method changes.</p>
+<h2 id="migrations">Migrations<a class="headerlink" href="#migrations" title="Permanent link">&para;</a></h2>
+<p>If your database uses pre-defined schemas, like SQL databases, you will need a migration to prepare the database for your model. Migrations are also useful for seeding databases with data. To create a migration, define a new type conforming to the <code>Migration</code> protocol. Take a look at the following migration for the previously defined <code>Galaxy</code> model.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">struct</span> <span class="nc">CreateGalaxy</span><span class="p">:</span> <span class="n">Migration</span> <span class="p">{</span>
+    <span class="c1">// Prepares the database for storing Galaxy models.</span>
+    <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">id</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">string</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Optionally reverts the changes made in the prepare method.</span>
+    <span class="kd">func</span> <span class="nf">revert</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">).</span><span class="n">delete</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>The <code>prepare</code> method is used for preparing the database to store <code>Galaxy</code> models. </p>
+<h3 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h3>
+<p>In this method, <code>database.schema(_:)</code> is used to create a new <code>SchemaBuilder</code>. One or more <code>field</code>s are then added to the builder before calling <code>create()</code> to create the schema.</p>
+<p>Each field added to the builder has a name, type, and optional constraints.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">field</span><span class="p">(&lt;</span><span class="n">name</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="n">type</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="kr">optional</span> <span class="n">constraints</span><span class="p">&gt;)</span>
+</code></pre></div>
+
+
+<p>There is a convenience <code>id()</code> method for adding <code>@ID</code> properties using Fluent's recommended defaults.</p>
+<p>Reverting the migration undoes any changes made in the prepare method. In this case, that means deleting the Galaxy's schema.</p>
+<p>Once the migration is defined, you must tell Fluent about it by adding it to <code>app.migrations</code> in <code>configure.swift</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateGalaxy</span><span class="p">())</span>
+</code></pre></div>
+
+
+<h3 id="migrate">Migrate<a class="headerlink" href="#migrate" title="Permanent link">&para;</a></h3>
+<p>To run migrations, call <code>vapor run migrate</code> from the command line or add <code>migrate</code> as an argument to Xcode's Run scheme.</p>
+<div class="codehilite"><pre><span></span><code>$ vapor run migrate
+Migrate Command: Prepare
+The following migration(s) will be prepared:
++ CreateGalaxy on default
+Would you like to continue?
+y/n&gt; y
+Migration successful
+</code></pre></div>
+
+
+<h2 id="querying">Querying<a class="headerlink" href="#querying" title="Permanent link">&para;</a></h2>
+<p>Now that you've successfully created a model and migrated your database, you're ready to make your first query. </p>
+<h3 id="all">All<a class="headerlink" href="#all" title="Permanent link">&para;</a></h3>
+<p>Take a look at the following route which will return an array of all the galaxies in the database.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="n">Galaxy</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">).</span><span class="n">all</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>In order to return a Galaxy directly in a route closure, add conformance to <code>Content</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">final</span> <span class="kd">class</span> <span class="nc">Galaxy</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Content</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p><code>Galaxy.query</code> is used to create a new query builder for the model. <code>req.db</code> is a reference to the default database for your application. Finally, <code>all()</code> returns all of the models stored in the database. </p>
+<p>If you compile and run the project and request <code>GET /galaxies</code>, you should see an empty array returned. Let's add a route for creating a new galaxy.</p>
+<h3 id="create">Create<a class="headerlink" href="#create" title="Permanent link">&para;</a></h3>
+<p>Following RESTful convention, use the <code>POST /galaxies</code> endpoint for creating a new galaxy. Since models are codable, you can decode a galaxy directly from the request body. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Galaxy</span><span class="p">&gt;</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">galaxy</span> <span class="p">=</span> <span class="k">try</span> <span class="n">req</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">Galaxy</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">galaxy</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">)</span>
+        <span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="n">galaxy</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<div class="admonition seealso">
+<p class="admonition-title">Seealso</p>
+<p>See <a href="../../content/">Content &rarr; Overview</a> for more information about decoding request bodies.</p>
+</div>
+<p>Once you have an instance of the model, calling <code>create(on:)</code> saves the model to the database. This returns an <code>EventLoopFuture&lt;Void&gt;</code> which signals that the save has completed. Once the save completes, return the newly created model using <code>map</code>.</p>
+<p>Build and run the project and send the following request.</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/galaxies</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">21</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Milky Way&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>You should get the created model back with an identifier as the response.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Milky Way&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Now, if you query <code>GET /galaxies</code> again, you should see the newly created galaxy returned in the array.</p>
+<h2 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">&para;</a></h2>
+<p>What are galaxies without stars! Let's take a quick look at Fluent's powerful relational features by adding a one-to-many relation between <code>Galaxy</code> and a new <code>Star</code> model. </p>
+<div class="codehilite"><pre><span></span><code><span class="kr">final</span> <span class="kd">class</span> <span class="nc">Star</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Content</span> <span class="p">{</span>
+    <span class="c1">// Name of the table or collection.</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">schema</span> <span class="p">=</span> <span class="s">&quot;stars&quot;</span>
+
+    <span class="c1">// Unique identifier for this Star.</span>
+    <span class="p">@</span><span class="n">ID</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="p">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span>
+
+    <span class="c1">// The Star&#39;s name.</span>
+    <span class="p">@</span><span class="n">Field</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+
+    <span class="c1">// Reference to the Galaxy this Star is in.</span>
+    <span class="p">@</span><span class="n">Parent</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;galaxy_id&quot;</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">galaxy</span><span class="p">:</span> <span class="n">Galaxy</span>
+
+    <span class="c1">// Creates a new, empty Star.</span>
+    <span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="c1">// Creates a new Star with all properties set.</span>
+    <span class="kd">init</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">galaxyID</span><span class="p">:</span> <span class="n">UUID</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+        <span class="kc">self</span><span class="p">.</span><span class="err">$</span><span class="n">galaxy</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">galaxyID</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="parent">Parent<a class="headerlink" href="#parent" title="Permanent link">&para;</a></h3>
+<p>The new <code>Star</code> model is very similar to <code>Galaxy</code> except for a new field type: <code>@Parent</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Parent</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;galaxy_id&quot;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">galaxy</span><span class="p">:</span> <span class="n">Galaxy</span>
+</code></pre></div>
+
+
+<p>The parent property is a field that stores another model's identifier. The model holding the reference is called the "child" and the referenced model is called the "parent". This type of relation is also known as "one-to-many". The <code>key</code> parameter to the property specifies the field name that should be used to store the parent's key in the database.</p>
+<p>In the init method, the parent identifier is set using <code>$galaxy</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kc">self</span><span class="p">.</span><span class="err">$</span><span class="n">galaxy</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">galaxyID</span>
+</code></pre></div>
+
+
+<p>By prefixing the parent property's name with <code>$</code>, you access the underlying property wrapper. This is required for getting access to the internal <code>@Field</code> that stores the actual identifier value.</p>
+<div class="admonition seealso">
+<p class="admonition-title">Seealso</p>
+<p>Check out the Swift Evolution proposal for property wrappers for more information: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md">[SE-0258] Property Wrappers</a></p>
+</div>
+<p>Next, create a migration to prepare the database for handling <code>Star</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">struct</span> <span class="nc">CreateStar</span><span class="p">:</span> <span class="n">Migration</span> <span class="p">{</span>
+    <span class="c1">// Prepares the database for storing Star models.</span>
+    <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;stars&quot;</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">id</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">string</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;galaxy_id&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">uuid</span><span class="p">,</span> <span class="p">.</span><span class="n">references</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">))</span>
+            <span class="p">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Optionally reverts the changes made in the prepare method.</span>
+    <span class="kd">func</span> <span class="nf">revert</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;stars&quot;</span><span class="p">).</span><span class="n">delete</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>This is mostly the same as galaxy's migration except for the additional field to store the parent galaxy's identifier.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">field</span><span class="p">(</span><span class="s">&quot;galaxy_id&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">uuid</span><span class="p">,</span> <span class="p">.</span><span class="n">references</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+
+<p>This field specifies an optional constraint telling the database that the field's value references the field "id" in the "galaxies" schema. This is also known as a foreign key and helps ensure data integrity.</p>
+<p>Once the migration is created, add it to <code>app.migrations</code> after the <code>CreateGalaxy</code> migration. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateGalaxy</span><span class="p">())</span>
+<span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateStar</span><span class="p">())</span>
+</code></pre></div>
+
+
+<p>Since migrations run in order, and <code>CreateStar</code> references the galaxies schema, ordering is important. Finally, <a href="#migrate">run the migrations</a> to prepare the database.</p>
+<p>Add a route for creating new stars.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;stars&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">Star</span><span class="p">&gt;</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">star</span> <span class="p">=</span> <span class="k">try</span> <span class="n">req</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">Star</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">star</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">)</span>
+        <span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="n">star</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Create a new star referencing the previously created galaxy using the following HTTP request.</p>
+<div class="codehilite"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/stars</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">content-length</span><span class="o">:</span> <span class="l">36</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sun&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;galaxy&quot;</span><span class="p">:</span> <span class="p">{</span> 
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>You should see the newly created star returned with a unique identifier.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sun&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;galaxy&quot;</span><span class="p">:</span> <span class="p">{</span> 
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="children">Children<a class="headerlink" href="#children" title="Permanent link">&para;</a></h3>
+<p>Now let's take a look at how you can utilize Fluent's eager-loading feature to automatically return a galaxy's stars in the <code>GET /galaxies</code> route. Add the following property to the <code>Galaxy</code> model.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// All the Stars in this Galaxy.</span>
+<span class="p">@</span><span class="n">Children</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">galaxy</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">stars</span><span class="p">:</span> <span class="p">[</span><span class="n">Star</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>The <code>@Children</code> property wrapper is the inverse of <code>@Parent</code>. It takes a key-path to the child's <code>@Parent</code> field as the <code>for</code> argument. Its value is an array of children since zero or more child models may exist. No changes to the galaxy's migration are needed since all the information needed for this relation is stored on <code>Star</code>.</p>
+<h3 id="eager-load">Eager Load<a class="headerlink" href="#eager-load" title="Permanent link">&para;</a></h3>
+<p>Now that the relation is complete, you can use the <code>with</code> method on the query builder to automatically fetch and serialize the galaxy-star relation.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;galaxies&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="n">Galaxy</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">stars</span><span class="p">).</span><span class="n">all</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>A key-path to the <code>@Children</code> relation is passed to <code>with</code> to tell Fluent to automatically load this relation in all of the resulting models. Build and run and send another request to <code>GET /galaxies</code>. You should now see the stars automatically included in the response.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Milky Way&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;stars&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span><span class="p">,</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sun&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;galaxy&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="err">...</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+
+<h3 id="siblings">Siblings<a class="headerlink" href="#siblings" title="Permanent link">&para;</a></h3>
+<p>The last type of relationship is many-to-many, or sibling relationship.  Create a <code>Tag</code> model with an <code>id</code> and <code>name</code> field that we'll use to tag stars with certain characteristics.  </p>
+<div class="codehilite"><pre><span></span><code><span class="kr">final</span> <span class="kd">class</span> <span class="nc">Tag</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Content</span> <span class="p">{</span>
+    <span class="c1">// Name of the table or collection.</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">schema</span><span class="p">:</span> <span class="nb">String</span> <span class="p">=</span> <span class="s">&quot;tags&quot;</span>
+
+    <span class="c1">// Unique identifier for this Tag.</span>
+    <span class="p">@</span><span class="n">ID</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="p">.</span><span class="n">id</span><span class="p">)</span> 
+    <span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span>
+
+    <span class="c1">// The Tag&#39;s name.</span>
+    <span class="p">@</span><span class="n">Field</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;name&quot;</span><span class="p">)</span> 
+    <span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+
+    <span class="c1">// Creates a new, empty Tag.</span>
+    <span class="kd">init</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="c1">// Creates a new Tag with all properties set.</span>
+    <span class="kd">init</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>A tag can have many stars and a star can have many tags making them siblings.  A sibling relationship between two models requires a third model (called a pivot) that holds the relationship data.  Each of these <code>StarTag</code> model objects will represent a single star-to-tag relationship holding the ids of a single <code>Star</code> and a single <code>Tag</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">final</span> <span class="kd">class</span> <span class="nc">StarTag</span><span class="p">:</span> <span class="n">Model</span> <span class="p">{</span>
+    <span class="c1">// Name of the table or collection.</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">schema</span><span class="p">:</span> <span class="nb">String</span> <span class="p">=</span> <span class="s">&quot;star_tag&quot;</span>
+
+    <span class="c1">// Unique identifier for this pivot.</span>
+    <span class="p">@</span><span class="n">ID</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="p">.</span><span class="n">id</span><span class="p">)</span> 
+    <span class="kd">var</span> <span class="nv">id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">?</span>
+
+    <span class="c1">// Reference to the Tag this pivot relates.</span>
+    <span class="p">@</span><span class="n">Parent</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;tag_id&quot;</span><span class="p">)</span> 
+    <span class="kd">var</span> <span class="nv">tag</span><span class="p">:</span> <span class="n">Tag</span>
+
+    <span class="c1">// Reference to the Star this pivot relates.</span>
+    <span class="p">@</span><span class="n">Parent</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;star_id&quot;</span><span class="p">)</span> 
+    <span class="kd">var</span> <span class="nv">star</span><span class="p">:</span> <span class="n">Star</span>
+
+    <span class="c1">// Creates a new, empty pivot.</span>
+    <span class="kd">init</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="c1">// Creates a new pivot with all properties set.</span>
+    <span class="kd">init</span><span class="p">(</span><span class="n">tagID</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">starID</span><span class="p">:</span> <span class="n">UUID</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="err">$</span><span class="n">tag</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">tagID</span>
+        <span class="kc">self</span><span class="p">.</span><span class="err">$</span><span class="n">star</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">starID</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Now let's update our new <code>Tag</code> model to add a <code>stars</code> property for all the stars that contain a tag:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Siblings</span><span class="p">(</span><span class="n">through</span><span class="p">:</span> <span class="n">StarTag</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">tag</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">star</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">stars</span><span class="p">:</span> <span class="p">[</span><span class="n">Star</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>The<code>@Siblings</code> property wrapper takes three arguments. The first argument is the pivot model that we created earlier, <code>StarTag</code>. The next two arguments are key paths to the pivot model's parent relations. The <code>from</code> key path is the pivot's parent relation to the current model, in this case <code>Tag</code>. The <code>to</code> key path is the pivot's parent relation to the related model, in this case <code>Star</code>. These three arguments together create a relation from the current model <code>Tag</code>, through the pivot <code>StarTag</code>, to the desired model <code>Star</code>. Now let's update our <code>Star</code> model with its siblings property which is the inverse of the one we just created:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Siblings</span><span class="p">(</span><span class="n">through</span><span class="p">:</span> <span class="n">StarTag</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">star</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">tag</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">tags</span><span class="p">:</span> <span class="p">[</span><span class="n">Tag</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>These siblings properties rely on <code>StarTag</code> for storage so we don't need to update the <code>Star</code> migration, but we do need to create migrations for the new <code>Tag</code> and <code>StarTag</code> models:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">struct</span> <span class="nc">CreateTag</span><span class="p">:</span> <span class="n">Migration</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;tags&quot;</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">id</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">string</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">revert</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;tags&quot;</span><span class="p">).</span><span class="n">delete</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="nc">CreateStarTag</span><span class="p">:</span> <span class="n">Migration</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;star_tag&quot;</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">id</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;star_id&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">uuid</span><span class="p">,</span> <span class="p">.</span><span class="kr">required</span><span class="p">,</span> <span class="p">.</span><span class="n">references</span><span class="p">(</span><span class="s">&quot;star&quot;</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">))</span>
+            <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;tag_id&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">uuid</span><span class="p">,</span> <span class="p">.</span><span class="kr">required</span><span class="p">,</span> <span class="p">.</span><span class="n">references</span><span class="p">(</span><span class="s">&quot;star&quot;</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">))</span>
+            <span class="p">.</span><span class="n">create</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">revert</span><span class="p">(</span><span class="n">on</span> <span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(</span><span class="s">&quot;star_tag&quot;</span><span class="p">).</span><span class="n">delete</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>And then add the migrations in configure.swift:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateTag</span><span class="p">())</span>
+<span class="n">app</span><span class="p">.</span><span class="n">migrations</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">CreateStarTag</span><span class="p">())</span>
+</code></pre></div>
+
+
+<p>Now we want to add tags to stars.  After creating a route to create a new tag, we need to create a route that will add a tag to an existing star.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;star&quot;</span><span class="p">,</span> <span class="s">&quot;:starID&quot;</span><span class="p">,</span> <span class="s">&quot;tag&quot;</span><span class="p">,</span> <span class="s">&quot;:tagID&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="n">HTTPStatus</span><span class="p">&gt;</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">star</span> <span class="p">=</span> <span class="n">Star</span><span class="p">.</span><span class="bp">find</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;starID&quot;</span><span class="p">),</span> <span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">or</span><span class="p">:</span> <span class="n">Abort</span><span class="p">(.</span><span class="n">notFound</span><span class="p">))</span>
+    <span class="kd">let</span> <span class="nv">tag</span> <span class="p">=</span> <span class="n">Tag</span><span class="p">.</span><span class="bp">find</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">parameters</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;tagID&quot;</span><span class="p">),</span> <span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">or</span><span class="p">:</span> <span class="n">Abort</span><span class="p">(.</span><span class="n">notFound</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">star</span><span class="p">.</span><span class="n">and</span><span class="p">(</span><span class="n">tag</span><span class="p">).</span><span class="n">flatMap</span> <span class="p">{</span> <span class="p">(</span><span class="n">star</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="k">in</span>
+        <span class="n">star</span><span class="p">.</span><span class="err">$</span><span class="n">tags</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">)</span>
+    <span class="p">}.</span><span class="n">transform</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">.</span><span class="n">ok</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>This route includes parameter path components for the IDs of star and tag that we want to associate with one another.  If we want to create a relationship between a star with an ID of 1 and a tag with an ID of 2, we'd send a <strong>POST</strong> request to  <code>/star/1/tag/2</code> and we'd receive an HTTP response code in return.  First, we lookup the star and tag in the database to ensure these are valid IDs.  Then, we create the relationship by attaching the tag to the star's tags.  Since the star's <code>tags</code> property is a relationship to another model, we need to access it via it's <code>@Siblings</code> property wrapper by using the <code>$</code> operator.</p>
+<p>Siblings aren't fetched by default so we need to update our get route for stars if we want include them when querying by inserting the <code>with</code> method:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;stars&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="n">Star</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">req</span><span class="p">.</span><span class="n">db</span><span class="p">).</span><span class="n">with</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="err">$</span><span class="n">tags</span><span class="p">).</span><span class="n">all</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2 id="lifecycle">Lifecycle<a class="headerlink" href="#lifecycle" title="Permanent link">&para;</a></h2>
+<p>To create hooks that respond to events on your <code>Model</code>, you can create middlewares for your model. Your middleware must conform to <code>ModelMiddleware</code>.</p>
+<p>Here is an example of a simple middleware:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">struct</span> <span class="nc">GalaxyMiddleware</span><span class="p">:</span> <span class="n">ModelMiddleware</span> <span class="p">{</span>
+    <span class="c1">// Runs when a model is created</span>
+    <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Runs when a model is updated</span>
+    <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Runs when a model is soft deleted </span>
+    <span class="kd">func</span> <span class="nf">softDelete</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">softDelete</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Runs when a soft deleted model is restored</span>
+    <span class="kd">func</span> <span class="nf">restore</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">restore</span><span class="p">(</span><span class="n">model</span> <span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Runs when a model is deleted</span>
+    <span class="c1">// If the &quot;force&quot; parameter is true, the model will be permanently deleted, </span>
+    <span class="c1">// even when using soft delete timestamps.</span>
+    <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="n">force</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Each of these methods has a default implementation, so you only need to include the methods you require. You should return the corresponding method on the next <code>AnyModelResponder</code> so Fluent continues processing the event. </p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The middleware will only respond to lifecycle events of the <code>Model</code> type provided in the functions. In the above example <code>GalaxyMiddleware</code> will respond to events on the Galaxy model.</p>
+</div>
+<p>Using these methods you can perform actions both before, and after the event completes.  Performing actions after the event completes can be done using using .flatMap() on the future returned from the next responder.  For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">struct</span> <span class="nc">GalaxyMiddleware</span><span class="p">:</span> <span class="n">ModelMiddleware</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Galaxy</span><span class="p">,</span> <span class="n">on</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">,</span> <span class="n">next</span><span class="p">:</span> <span class="n">AnyModelResponder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">{</span>
+
+        <span class="c1">// The model can be altered here before it is created</span>
+        <span class="n">model</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;&lt;New Galaxy Name&gt;&quot;</span>
+
+        <span class="k">return</span> <span class="n">next</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">).</span><span class="n">flatMap</span> <span class="p">{</span>
+            <span class="c1">// Once the galaxy has been created, the code here will be executed</span>
+            <span class="bp">print</span> <span class="p">(</span><span class="s">&quot;Galaxy </span><span class="si">\(</span><span class="n">model</span><span class="p">.</span><span class="n">name</span><span class="si">)</span><span class="s"> was created&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Once you have created your middleware, you must register it with the <code>Application</code>'s database middleware configuration so Vapor will use it. In <code>configure.swift</code> add:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">databases</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">use</span><span class="p">(</span><span class="n">GalaxyMiddleware</span><span class="p">(),</span> <span class="n">on</span><span class="p">:</span> <span class="p">.</span><span class="n">psql</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="timestamps">Timestamps<a class="headerlink" href="#timestamps" title="Permanent link">&para;</a></h2>
+<p>Fluent provides the ability to track creation and update times on models by specifying <code>Timestamp</code> fields in your model. Fluent automatically sets the fields when necessary. You can add these like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;created_at&quot;</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="p">.</span><span class="n">create</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">createdAt</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+
+<span class="p">@</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;updated_at&quot;</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="p">.</span><span class="n">update</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">updatedAt</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+</code></pre></div>
+
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can use any name/key for these fields. <code>created_at</code> / <code>updated_at</code>, are only for illustration purposes</p>
+</div>
+<p>Timestamps are added as fields in a migration using the <code>.datetime</code> data type.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">database</span><span class="p">.</span><span class="n">schema</span><span class="p">(...)</span>
+    <span class="p">...</span>
+    <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;created_at&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">datetime</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;updated_at&quot;</span><span class="p">,</span> <span class="p">.</span><span class="n">datetime</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">create</span><span class="p">()</span>
+</code></pre></div>
+
+
+<h3 id="soft-delete">Soft Delete<a class="headerlink" href="#soft-delete" title="Permanent link">&para;</a></h3>
+<p>Soft deletion marks an item as deleted in the database but doesn't actually remove it. This can be useful when you have data retention requirements, for example. In Fluent, it works by setting a deletion timestamp. By default, soft deleted items won't appear in queries and can be restored at any time.</p>
+<p>Similar to created and deleted timestamps, to enable soft deletion in a model just set a deletion timestamp for <code>.delete</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&quot;deleted_at&quot;</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="p">.</span><span class="n">delete</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">deletedAt</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+</code></pre></div>
+
+
+<p>Calling <code>Model.delete(on:)</code> on a model that has a delete timestamp property will automatically soft delete it.</p>
+<p>If you need to perform a query that includes the soft deleted items, you can use <code>withDeleted()</code> in your query. </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Get all galaxies including soft-deleted ones.</span>
+<span class="n">Galaxy</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">).</span><span class="n">withDeleted</span><span class="p">().</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>You can restore a soft deleted model with <code>restore(on:)</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Restore galaxy</span>
+<span class="n">galaxy</span><span class="p">.</span><span class="n">restore</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>To permanently delete an item with an on-delete timestamp, use the <code>force</code> parameter:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Permanently delete</span>
+<span class="n">galaxy</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">force</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>Congratulations on creating your first models and migrations and performing basic create and read operations. For more in-depth information on all of these features, check out their respective sections in the Fluent guide.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../errors/" title="Errors" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Errors
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../models/" title="Models" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Models
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

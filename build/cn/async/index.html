@@ -1,0 +1,1642 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://swiftclub.github.io/vapor-docs/async/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+
+<title>Vapor:  入门 &rarr;  Async</title>
+
+
+    
+
+      <link rel="stylesheet" href="../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+
+    
+
+
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-76177358-4","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#async" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://swiftclub.github.io/vapor-docs" title="vapor-docs" class="md-header-nav__button md-logo" aria-label="vapor-docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            vapor-docs
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Async
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/swiftclub/vapor-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://swiftclub.github.io/vapor-docs" title="vapor-docs" class="md-nav__button md-logo" aria-label="vapor-docs">
+      
+  <img src="../logo.png" alt="logo">
+
+    </a>
+    vapor-docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/swiftclub/vapor-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="序" class="md-nav__link">
+      序
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      安装
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="安装" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        安装
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/macos/" title="macOS" class="md-nav__link">
+      macOS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/ubuntu/" title="Ubuntu" class="md-nav__link">
+      Ubuntu
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      起步
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="起步" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        起步
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hello-world/" title="Hello, world" class="md-nav__link">
+      Hello, world
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder-structure/" title="Folder Structure" class="md-nav__link">
+      Folder Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spm/" title="SPM" class="md-nav__link">
+      SPM
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      入门
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="入门" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        入门
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../routing/" title="Routing" class="md-nav__link">
+      Routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../content/" title="Content" class="md-nav__link">
+      Content
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client/" title="Client" class="md-nav__link">
+      Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../validation/" title="Validation" class="md-nav__link">
+      Validation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Async
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Async" class="md-nav__link md-nav__link--active">
+      Async
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transforming" class="md-nav__link">
+    Transforming
+  </a>
+  
+    <nav class="md-nav" aria-label="Transforming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flatmapthrowing" class="md-nav__link">
+    flatMapThrowing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flatmap" class="md-nav__link">
+    flatMap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    transform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaining" class="md-nav__link">
+    Chaining
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future" class="md-nav__link">
+    Future
+  </a>
+  
+    <nav class="md-nav" aria-label="Future">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#makefuture" class="md-nav__link">
+    makeFuture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whencomplete" class="md-nav__link">
+    whenComplete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-loop" class="md-nav__link">
+    Event Loop
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hop" class="md-nav__link">
+    hop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blocking" class="md-nav__link">
+    Blocking
+  </a>
+  
+    <nav class="md-nav" aria-label="Blocking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io-bound" class="md-nav__link">
+    I/O Bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-bound" class="md-nav__link">
+    CPU Bound
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" title="Logging" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../environment/" title="Environment" class="md-nav__link">
+      Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../errors/" title="Errors" class="md-nav__link">
+      Errors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Fluent
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Fluent" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Fluent
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/models/" title="Models" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/migrations/" title="Migrations" class="md-nav__link">
+      Migrations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/relations/" title="Relations" class="md-nav__link">
+      Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fluent/query-builder/" title="Query Builder" class="md-nav__link">
+      Query Builder
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      进阶
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="进阶" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        进阶
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../middleware/" title="Middleware" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server/" title="Server" class="md-nav__link">
+      Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" title="Commands" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../queues/" title="Queues" class="md-nav__link">
+      Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../websockets/" title="WebSockets" class="md-nav__link">
+      WebSockets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sessions/" title="Sessions" class="md-nav__link">
+      Sessions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      安全
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="安全" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        安全
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../crypto/" title="Crypto" class="md-nav__link">
+      Crypto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../passwords/" title="Passwords" class="md-nav__link">
+      Passwords
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      部署
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="部署" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        部署
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/digital-ocean/" title="DigitalOcean" class="md-nav__link">
+      DigitalOcean
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/supervisor/" title="Supervisor" class="md-nav__link">
+      Supervisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/nginx/" title="Nginx" class="md-nav__link">
+      Nginx
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Version (4.0)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Version (4.0)" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Version (4.0)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/1_5/" title="1.5" class="md-nav__link">
+      1.5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/2_0/" title="2.0" class="md-nav__link">
+      2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/3_0/" title="3.0" class="md-nav__link">
+      3.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/4_0/" title="4.0" class="md-nav__link">
+      4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrading/" title="Upgrading" class="md-nav__link">
+      Upgrading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transforming" class="md-nav__link">
+    Transforming
+  </a>
+  
+    <nav class="md-nav" aria-label="Transforming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flatmapthrowing" class="md-nav__link">
+    flatMapThrowing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flatmap" class="md-nav__link">
+    flatMap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    transform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaining" class="md-nav__link">
+    Chaining
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future" class="md-nav__link">
+    Future
+  </a>
+  
+    <nav class="md-nav" aria-label="Future">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#makefuture" class="md-nav__link">
+    makeFuture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whencomplete" class="md-nav__link">
+    whenComplete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#event-loop" class="md-nav__link">
+    Event Loop
+  </a>
+  
+    <nav class="md-nav" aria-label="Event Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hop" class="md-nav__link">
+    hop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blocking" class="md-nav__link">
+    Blocking
+  </a>
+  
+    <nav class="md-nav" aria-label="Blocking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io-bound" class="md-nav__link">
+    I/O Bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-bound" class="md-nav__link">
+    CPU Bound
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/swiftclub/vapor-docs/edit/master/docs/async.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="async">Async<a class="headerlink" href="#async" title="Permanent link">&para;</a></h1>
+<p>You may have noticed some APIs in Vapor expect or return a generic <code>EventLoopFuture</code> type. If this is your first time hearing about futures, they might seem a little confusing at first. But don't worry, this guide will show you how to take advantage of their powerful APIs. </p>
+<p>Promises and futures are related, but distinct, types. Promises are used to <em>create</em> futures. Most of the time, you will be working with futures returned by Vapor's APIs and you will not need to worry about creating promises.</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>description</th>
+<th>mutability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EventLoopFuture</code></td>
+<td>Reference to a value that may not be available yet.</td>
+<td>read-only</td>
+</tr>
+<tr>
+<td><code>EventLoopPromise</code></td>
+<td>A promise to provide some value asynchronously.</td>
+<td>read/write</td>
+</tr>
+</tbody>
+</table>
+<p>Futures are an alternative to callback-based asynchronous APIs. Futures can be chained and transformed in ways that simple closures cannot.</p>
+<h2 id="transforming">Transforming<a class="headerlink" href="#transforming" title="Permanent link">&para;</a></h2>
+<p>Just like optionals and arrays in Swift, futures can be mapped and flat-mapped. These are the most common operations you will perform on futures.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>argument</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#map"><code>map</code></a></td>
+<td><code>(T) -&gt; U</code></td>
+<td>Maps a future value to a different value.</td>
+</tr>
+<tr>
+<td><a href="#flatmapthrowing"><code>flatMapThrowing</code></a></td>
+<td><code>(T) throws -&gt; U</code></td>
+<td>Maps a future value to a different value or an error.</td>
+</tr>
+<tr>
+<td><a href="#flatmap"><code>flatMap</code></a></td>
+<td><code>(T) -&gt; EventLoopFuture&lt;U&gt;</code></td>
+<td>Maps a future value to different <em>future</em> value.</td>
+</tr>
+<tr>
+<td><a href="#transform"><code>transform</code></a></td>
+<td><code>U</code></td>
+<td>Maps a future to an already available value.</td>
+</tr>
+</tbody>
+</table>
+<p>If you look at the method signatures for <code>map</code> and <code>flatMap</code> on <code>Optional&lt;T&gt;</code> and <code>Array&lt;T&gt;</code>, you will see that they are very similar to the methods available on <code>EventLoopFuture&lt;T&gt;</code>.</p>
+<h3 id="map">map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h3>
+<p>The <code>map</code> method allows you to transform the future's value to another value. Because the future's value may not be available yet (it may be the result of an asynchronous task) we must provide a closure to accept the value.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Map the future string to an integer</span>
+<span class="kd">let</span> <span class="nv">futureInt</span> <span class="p">=</span> <span class="n">futureString</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="bp">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1">// The actual String</span>
+    <span class="k">return</span> <span class="nb">Int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="p">??</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1">/// We now have a future integer</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">futureInt</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;Int&gt;</span>
+</code></pre></div>
+
+
+<h3 id="flatmapthrowing">flatMapThrowing<a class="headerlink" href="#flatmapthrowing" title="Permanent link">&para;</a></h3>
+<p>The <code>flatMapThrowing</code> method allows you to transform the future's value to another value <em>or</em> throw an error. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Because throwing an error must create a new future internally, this method is prefixed <code>flatMap</code> even though the closure does not accept a future return.</p>
+</div>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Map the future string to an integer</span>
+<span class="kd">let</span> <span class="nv">futureInt</span> <span class="p">=</span> <span class="n">futureString</span><span class="p">.</span><span class="n">flatMapThrowing</span> <span class="p">{</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="bp">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1">// The actual String</span>
+    <span class="c1">// Convert the string to an integer or throw an error</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">int</span> <span class="p">=</span> <span class="nb">Int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">Abort</span><span class="p">(...)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">int</span>
+<span class="p">}</span>
+
+<span class="c1">/// We now have a future integer</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">futureInt</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;Int&gt;</span>
+</code></pre></div>
+
+
+<h3 id="flatmap">flatMap<a class="headerlink" href="#flatmap" title="Permanent link">&para;</a></h3>
+<p>The <code>flatMap</code> method allows you to transform the future's value to another future value. It gets the name "flat" map because it is what allows you to avoid creating nested futures (e.g., <code>EventLoopFuture&lt;EventLoopFuture&lt;T&gt;&gt;</code>). In other words, it helps you keep your generics flat.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Assume we have created an HTTP client</span>
+<span class="kd">let</span> <span class="nv">client</span><span class="p">:</span> <span class="n">Client</span> <span class="p">=</span> <span class="p">...</span> 
+
+<span class="c1">/// flatMap the future string to a future response</span>
+<span class="kd">let</span> <span class="nv">futureResponse</span> <span class="p">=</span> <span class="n">futureString</span><span class="p">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="n">client</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;ClientResponse&gt;</span>
+<span class="p">}</span>
+
+<span class="c1">/// We now have a future response</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">futureResponse</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;ClientResponse&gt;</span>
+</code></pre></div>
+
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If we instead used <code>map</code> in the above example, we would have ended up with: <code>EventLoopFuture&lt;EventLoopFuture&lt;ClientResponse&gt;&gt;</code>.</p>
+</div>
+<p>To call a throwing method inside of a <code>flatMap</code>, use Swift's <code>do</code> / <code>catch</code> keywords and create a <a href="#makefuture">completed future</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume future string and client from previous example.</span>
+<span class="kd">let</span> <span class="nv">futureResponse</span> <span class="p">=</span> <span class="n">futureString</span><span class="p">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="kd">let</span> <span class="nv">url</span><span class="p">:</span> <span class="n">URL</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="c1">// Some synchronous throwing method.</span>
+        <span class="n">url</span> <span class="p">=</span> <span class="k">try</span> <span class="n">convertToURL</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+        <span class="c1">// Use event loop to make pre-completed future.</span>
+        <span class="k">return</span> <span class="n">eventLoop</span><span class="p">.</span><span class="n">makeFailedFuture</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">client</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;ClientResponse&gt;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="transform">transform<a class="headerlink" href="#transform" title="Permanent link">&para;</a></h3>
+<p>The <code>transform</code> method allows you to modify a future's value, ignoring the existing value. This is especially useful for transforming the results of <code>EventLoopFuture&lt;Void&gt;</code> where the actual value of the future is not important.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>EventLoopFuture&lt;Void&gt;</code>, sometimes called a signal, is a future whose sole purpose is to notify you of completion or failure of some async operation.</p>
+</div>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a void future back from some API</span>
+<span class="kd">let</span> <span class="nv">userDidSave</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">Void</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Transform the void future to an HTTP status</span>
+<span class="kd">let</span> <span class="nv">futureStatus</span> <span class="p">=</span> <span class="n">userDidSave</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="p">.</span><span class="n">ok</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">futureStatus</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;HTTPStatus&gt;</span>
+</code></pre></div>
+
+
+<p>Even though we have supplied an already-available value to <code>transform</code>, this is still a <em>transformation</em>. The future will not complete until all previous futures have completed (or failed).</p>
+<h3 id="chaining">Chaining<a class="headerlink" href="#chaining" title="Permanent link">&para;</a></h3>
+<p>The great part about transformations on futures is that they can be chained. This allows you to express many conversions and subtasks easily.</p>
+<p>Let's modify the examples from above to see how we can take advantage of chaining.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Assume we have created an HTTP client</span>
+<span class="kd">let</span> <span class="nv">client</span><span class="p">:</span> <span class="n">Client</span> <span class="p">=</span> <span class="p">...</span> 
+
+<span class="c1">/// Transform the string to a url, then to a response</span>
+<span class="kd">let</span> <span class="nv">futureResponse</span> <span class="p">=</span> <span class="n">futureString</span><span class="p">.</span><span class="n">flatMapThrowing</span> <span class="p">{</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">url</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">Abort</span><span class="p">(.</span><span class="n">badRequest</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="s">&quot;Invalid URL string: </span><span class="si">\(</span><span class="n">string</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">url</span>
+<span class="p">}.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">url</span> <span class="k">in</span>
+    <span class="n">client</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="bp">print</span><span class="p">(</span><span class="n">futureResponse</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;ClientResponse&gt;</span>
+</code></pre></div>
+
+
+<p>After the initial call to map, there is a temporary <code>EventLoopFuture&lt;URL&gt;</code> created. This future is then immediately flat-mapped to a <code>EventLoopFuture&lt;Response&gt;</code></p>
+<h2 id="future">Future<a class="headerlink" href="#future" title="Permanent link">&para;</a></h2>
+<p>Let's take a look at some other methods for using <code>EventLoopFuture&lt;T&gt;</code>.</p>
+<h3 id="makefuture">makeFuture<a class="headerlink" href="#makefuture" title="Permanent link">&para;</a></h3>
+<p>You can use an event loop to create pre-completed future with either the value or an error.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Create a pre-succeeded future.</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">eventLoop</span><span class="p">.</span><span class="n">makeSucceededFuture</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+
+<span class="c1">// Create a pre-failed future.</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">eventLoop</span><span class="p">.</span><span class="n">makeFailedFuture</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="whencomplete">whenComplete<a class="headerlink" href="#whencomplete" title="Permanent link">&para;</a></h3>
+<p>You can use <code>whenComplete</code> to add a callback that will be executed when the future succeeds or fails.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="n">futureString</span><span class="p">.</span><span class="n">whenComplete</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="kd">let</span> <span class="nv">string</span><span class="p">):</span>
+        <span class="bp">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1">// The actual String</span>
+    <span class="k">case</span> <span class="p">.</span><span class="n">failure</span><span class="p">(</span><span class="kd">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="bp">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="c1">// A Swift Error</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can add as many callbacks to a future as you want.</p>
+</div>
+<h3 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h3>
+<p>You can use <code>.wait()</code> to synchronously wait for the future to be completed. Since a future may fail, this call is throwing.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">/// Assume we get a future string back from some API</span>
+<span class="kd">let</span> <span class="nv">futureString</span><span class="p">:</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">...</span>
+
+<span class="c1">/// Block until the string is ready</span>
+<span class="kd">let</span> <span class="nv">string</span> <span class="p">=</span> <span class="k">try</span> <span class="n">futureString</span><span class="p">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1">/// String</span>
+</code></pre></div>
+
+
+<p><code>wait()</code> can only be used on a background thread or the main thread, i.e., in <code>configure.swift</code>. It can <em>not</em> be used on an event loop thread, i.e., in route closures.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Attempting to call <code>wait()</code> on an event loop thread will cause an assertion failure.</p>
+</div>
+<h2 id="promise">Promise<a class="headerlink" href="#promise" title="Permanent link">&para;</a></h2>
+<p>Most of the time, you will be transforming futures returned by calls to Vapor's APIs. However, at some point you may need to create a promise of your own.</p>
+<p>To create a promise, you will need access to an <code>EventLoop</code>. You can get access to an event loop from <code>Application</code> or <code>Request</code> depending on context.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">let</span> <span class="nv">eventLoop</span><span class="p">:</span> <span class="n">EventLoop</span> 
+
+<span class="c1">// Create a new promise for some string.</span>
+<span class="kd">let</span> <span class="nv">promiseString</span> <span class="p">=</span> <span class="n">eventLoop</span><span class="p">.</span><span class="n">makePromise</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">promiseString</span><span class="p">)</span> <span class="c1">// EventLoopPromise&lt;String&gt;</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">promiseString</span><span class="p">.</span><span class="n">futureResult</span><span class="p">)</span> <span class="c1">// EventLoopFuture&lt;String&gt;</span>
+
+<span class="c1">// Completes the associated future.</span>
+<span class="n">promiseString</span><span class="p">.</span><span class="n">succeed</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+
+<span class="c1">// Fails the associated future.</span>
+<span class="n">promiseString</span><span class="p">.</span><span class="n">fail</span><span class="p">(...)</span>
+</code></pre></div>
+
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A promise can only be completed once. Any subsequent completions will be ignored.</p>
+</div>
+<p>Promises can be completed (<code>succeed</code> / <code>fail</code>) from any thread. This is why promises require an event loop to be initialized. Promises ensure that the completion action gets returned to its event loop for execution.</p>
+<h2 id="event-loop">Event Loop<a class="headerlink" href="#event-loop" title="Permanent link">&para;</a></h2>
+<p>When your application boots, it will usually create one event loop for each core in the CPU it is running on. Each event loop has exactly one thread. If you are familiar with event loops from Node.js, the ones in Vapor are similar. The main difference is that Vapor can run multiple event loops in one process since Swift supports multi-threading.</p>
+<p>Each time a client connects to your server, it will be assigned to one of the event loops. From that point on, all communication between the server and that client will happen on that same event loop (and by association, that event loop's thread). </p>
+<p>The event loop is responsible for keeping track of each connected client's state. If there is a request from the client waiting to be read, the event loop triggers a read notification, causing the data to be read. Once the entire request is read, any futures waiting for that request's data will be completed. </p>
+<p>In route closures, you can access the current event loop via <code>Request</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">req</span><span class="p">.</span><span class="n">eventLoop</span><span class="p">.</span><span class="n">makePromise</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="p">...)</span>
+</code></pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Vapor expects that route closures will stay on <code>req.eventLoop</code>. If you hop threads, you must ensure access to <code>Request</code> and the final response future all happen on the request's event loop. </p>
+</div>
+<p>Outside of route closures, you can get one of the available event loops via <code>Application</code>. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">eventLoopGroup</span><span class="p">.</span><span class="n">next</span><span class="p">().</span><span class="n">makePromise</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="p">...)</span>
+</code></pre></div>
+
+
+<h3 id="hop">hop<a class="headerlink" href="#hop" title="Permanent link">&para;</a></h3>
+<p>You can change a future's event loop using <code>hop</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">futureString</span><span class="p">.</span><span class="n">hop</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">otherEventLoop</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="blocking">Blocking<a class="headerlink" href="#blocking" title="Permanent link">&para;</a></h2>
+<p>Calling blocking code on an event loop thread can prevent your application from responding to incoming requests in a timely manner. An example of a blocking call would be something like <code>libc.sleep(_:)</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">router</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="k">in</span>
+    <span class="c1">/// Puts the event loop&#39;s thread to sleep.</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1">/// Returns a simple string once the thread re-awakens.</span>
+    <span class="k">return</span> <span class="s">&quot;Hello, world!&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p><code>sleep(_:)</code> is a command that blocks the current thread for the number of seconds supplied. If you do blocking work like this directly on an event loop, the event loop will be unable to respond to any other clients assigned to it for the duration of the blocking work. In other words, if you do <code>sleep(5)</code> on an event loop, all of the other clients connected to that event loop (possibly hundreds or thousands) will be delayed for at least 5 seconds. </p>
+<p>Make sure to run any blocking work in the background. Use promises to notify the event loop when this work is done in a non-blocking way.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">router</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">req</span> <span class="p">-&gt;</span> <span class="n">EventLoopFuture</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span> <span class="k">in</span>
+    <span class="c1">/// Create a new void promise</span>
+    <span class="kd">let</span> <span class="nv">promise</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">eventLoop</span><span class="p">.</span><span class="n">makePromise</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="nb">Void</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+
+    <span class="c1">/// Dispatch some work to happen on a background thread</span>
+    <span class="n">req</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">threadPool</span><span class="p">.</span><span class="n">submit</span> <span class="p">{</span> <span class="kc">_</span> <span class="k">in</span>
+        <span class="c1">/// Puts the background thread to sleep</span>
+        <span class="c1">/// This will not affect any of the event loops</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="c1">/// When the &quot;blocking work&quot; has completed,</span>
+        <span class="c1">/// complete the promise and its associated future.</span>
+        <span class="n">promise</span><span class="p">.</span><span class="n">succeed</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Wait for the future to be completed, </span>
+    <span class="c1">/// then transform the result to a simple String</span>
+    <span class="k">return</span> <span class="n">promise</span><span class="p">.</span><span class="n">futureResult</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Not all blocking calls will be as obvious as <code>sleep(_:)</code>. If you are suspicious that a call you are using may be blocking, research the method itself or ask someone. The sections below go over how methods can block in more detail.</p>
+<h3 id="io-bound">I/O Bound<a class="headerlink" href="#io-bound" title="Permanent link">&para;</a></h3>
+<p>I/O bound blocking means waiting on a slow resource like a network or hard disk which can be orders of magnitude slower than the CPU. Blocking the CPU while you wait for these resources results in wasted time. </p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Never make blocking I/O bound calls directly on an event loop.</p>
+</div>
+<p>All of Vapor's packages are built on SwiftNIO and use non-blocking I/O. However, there are many Swift packages and C libraries in the wild that use blocking I/O. Chances are if a function is doing disk or network IO and uses a synchronous API (no callbacks or futures) it is blocking.</p>
+<h3 id="cpu-bound">CPU Bound<a class="headerlink" href="#cpu-bound" title="Permanent link">&para;</a></h3>
+<p>Most of the time during a request is spent waiting for external resources like database queries and network requests to load. Because Vapor and SwiftNIO are non-blocking, this downtime can be used for fulfilling other incoming requests. However, some routes in your application may need to do heavy CPU bound work as the result of a request.</p>
+<p>While an event loop is processing CPU bound work, it will be unable to respond to other incoming requests. This is normally fine since CPUs are fast and most CPU work web applications do is lightweight. But this can become a problem if routes with long running CPU work are preventing requests to faster routes from being responded to quickly. </p>
+<p>Identifying long running CPU work in your app and moving it to background threads can help improve the reliability and responsiveness of your service. CPU bound work is more of a gray area than I/O bound work, and it is ultimately up to you to determine where you want to draw the line. </p>
+<p>A common example of heavy CPU bound work is Bcrypt hashing during user signup and login. Bcrypt is deliberately very slow and CPU intensive for security reasons. This may be the most CPU intensive work a simple web application actually does. Moving hashing to a background thread can allow the CPU to interleave event loop work while calculating hashes which results in higher concurrency.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../validation/" title="Validation" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Validation
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../logging/" title="Logging" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Logging
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
